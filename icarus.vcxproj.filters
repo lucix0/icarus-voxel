@@ -59,6 +59,12 @@
     </None>
     <None Include="shaders\basic_fragment.glsl" />
     <None Include="shaders\basic_vertex.glsl" />
+    <None Include=".gitignore" />
+    <None Include="LICENSE" />
+    <None Include="thirdparty\sfml-system-2.dll" />
+    <None Include="thirdparty\sfml-system-d-2.dll" />
+    <None Include="thirdparty\sfml-window-2.dll" />
+    <None Include="thirdparty\sfml-window-d-2.dll" />
   </ItemGroup>
   <ItemGroup>
     <Library Include="lib\Debug\SFML\sfml-main-d.lib" />
@@ -67,6 +73,12 @@
     <Library Include="lib\Release\SFML\sfml-main.lib" />
     <Library Include="lib\Release\SFML\sfml-system.lib" />
     <Library Include="lib\Release\SFML\sfml-window.lib" />
+    <Library Include="lib\sfml-main.lib" />
+    <Library Include="lib\sfml-main-d.lib" />
+    <Library Include="lib\sfml-system.lib" />
+    <Library Include="lib\sfml-system-d.lib" />
+    <Library Include="lib\sfml-window.lib" />
+    <Library Include="lib\sfml-window-d.lib" />
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="extinclude\SFML\Audio\AlResource.hpp">

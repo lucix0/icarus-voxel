@@ -6,18 +6,45 @@
 
 #include "shader.h"
 
-void GLAPIENTRY glErrorCallback(
-    GLenum source,
-    GLenum type,
-    GLuint id,
-    GLenum severity,
-    GLsizei length,
-    const GLchar* message,
-    const void* userParam
-) {
-    fprintf(stderr, "GL CALLBACK: %s type = 0x%x, severity = 0x%x, message = %s\n",
-        (type == GL_DEBUG_TYPE_ERROR ? "** GL ERROR **" : ""),
-        type, severity, message);
+float points[] = {
+   0.0f,  0.5f,  0.0f,
+   0.5f, -0.5f,  0.0f,
+  -0.5f, -0.5f,  0.0f
+};
+
+void glErrorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, GLchar const* message, void const* user_param) {
+    auto const src_str = [source]() {
+        switch (source) {
+            case GL_DEBUG_SOURCE_API: return "API";
+            case GL_DEBUG_SOURCE_WINDOW_SYSTEM: return "WINDOW SYSTEM";
+            case GL_DEBUG_SOURCE_SHADER_COMPILER: return "SHADER COMPILER";
+            case GL_DEBUG_SOURCE_THIRD_PARTY: return "THIRD PARTY";
+            case GL_DEBUG_SOURCE_APPLICATION: return "APPLICATION";
+            case GL_DEBUG_SOURCE_OTHER: return "OTHER";
+        }
+    }();
+
+    auto const type_str = [type]() {
+        switch (type) {
+            case GL_DEBUG_TYPE_ERROR: return "ERROR";
+            case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: return "DEPRECATED_BEHAVIOR";
+            case GL_DEBUG_TYPE_UNDEFINED_BEHAVIOR: return "UNDEFINED_BEHAVIOR";
+            case GL_DEBUG_TYPE_PORTABILITY: return "PORTABILITY";
+            case GL_DEBUG_TYPE_PERFORMANCE: return "PERFORMANCE";
+            case GL_DEBUG_TYPE_MARKER: return "MARKER";
+            case GL_DEBUG_TYPE_OTHER: return "OTHER";
+        }
+    }();
+
+    auto const severity_str = [severity]() {
+        switch (severity) {
+            case GL_DEBUG_SEVERITY_NOTIFICATION: return "NOTIFICATION";
+            case GL_DEBUG_SEVERITY_LOW: return "LOW";
+            case GL_DEBUG_SEVERITY_MEDIUM: return "MEDIUM";
+            case GL_DEBUG_SEVERITY_HIGH: return "HIGH";
+        }
+    }();
+    std::cout << src_str << ", " << type_str << ", " << severity_str << ", " << id << ": " << message << '\n';
 }
 
 int main() {
@@ -43,6 +70,21 @@ int main() {
 
     Shader test_shader;
     test_shader.load_from_file("shaders/basic_vertex.glsl", "shaders/basic_fragment.glsl");
+    glUseProgram(test_shader.get_handle());
+
+    unsigned int vertex_buffer;
+    glCreateBuffers(1, &vertex_buffer);
+    glNamedBufferData(vertex_buffer, 9 * sizeof(float), &points, GL_STATIC_DRAW);
+
+    unsigned int vertex_array;
+    glCreateVertexArrays(1, &vertex_array);
+    glVertexArrayVertexBuffer(vertex_array, 0, vertex_buffer, 0, 3 * sizeof(float));
+
+    glEnableVertexArrayAttrib(vertex_array, 0);
+    glVertexArrayAttribFormat(vertex_array, 0, 3, GL_FLOAT, GL_FALSE, 0);
+    glVertexArrayAttribBinding(vertex_array, 0, 0);
+
+    glBindVertexArray(vertex_array);
 
     bool shouldQuit = false;
     while (!shouldQuit) {
@@ -59,7 +101,7 @@ int main() {
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
-        // Draw
+        glDrawArrays(GL_TRIANGLES, 0, 3);
 
         window.display();
     }

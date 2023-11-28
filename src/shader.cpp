@@ -83,4 +83,8 @@ void Shader::load_from_file(const std::string& vertex_path, const std::string& f
     glDeleteShader(fragment_shader);
 }
 
+unsigned int Shader::get_handle() {
+    return m_handle;
+}
+
 
