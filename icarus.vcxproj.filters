@@ -30,12 +30,17 @@
     <ClCompile Include="extinclude\glm\detail\glm.cpp">
       <Filter>Source Files</Filter>
     </ClCompile>
+    <ClCompile Include="src\stb_image.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\Texture.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
+    <ClCompile Include="src\file_io.cpp">
+      <Filter>Source Files</Filter>
+    </ClCompile>
   </ItemGroup>
   <ItemGroup>
-    <None Include="lib\Debug\SFML\sfml-window-d-2.dll" />
-    <None Include="lib\Debug\SFML\sfml-system-d-2.dll" />
-    <None Include="lib\Release\SFML\sfml-system-2.dll" />
-    <None Include="lib\Release\SFML\sfml-window-2.dll" />
     <None Include="extinclude\SFML\Audio\SoundFileFactory.inl">
       <Filter>Header Files</Filter>
     </None>
@@ -67,10 +72,6 @@
     <None Include="shaders\basic_vertex.glsl" />
     <None Include=".gitignore" />
     <None Include="LICENSE" />
-    <None Include="thirdparty\sfml-system-2.dll" />
-    <None Include="thirdparty\sfml-system-d-2.dll" />
-    <None Include="thirdparty\sfml-window-2.dll" />
-    <None Include="thirdparty\sfml-window-d-2.dll" />
     <None Include="extinclude\glm\detail\func_common.inl">
       <Filter>Header Files</Filter>
     </None>
@@ -479,14 +480,12 @@
     <None Include="extinclude\glm\gtx\wrap.inl">
       <Filter>Header Files</Filter>
     </None>
+    <None Include="thirdparty\r\sfml-system-2.dll" />
+    <None Include="thirdparty\d\sfml-system-d-2.dll" />
+    <None Include="thirdparty\r\sfml-window-2.dll" />
+    <None Include="thirdparty\d\sfml-window-d-2.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="lib\Debug\SFML\sfml-main-d.lib" />
-    <Library Include="lib\Debug\SFML\sfml-system-d.lib" />
-    <Library Include="lib\Debug\SFML\sfml-window-d.lib" />
-    <Library Include="lib\Release\SFML\sfml-main.lib" />
-    <Library Include="lib\Release\SFML\sfml-system.lib" />
-    <Library Include="lib\Release\SFML\sfml-window.lib" />
     <Library Include="lib\sfml-main.lib" />
     <Library Include="lib\sfml-main-d.lib" />
     <Library Include="lib\sfml-system.lib" />
@@ -1645,6 +1644,12 @@
       <Filter>Header Files</Filter>
     </ClInclude>
     <ClInclude Include="extinclude\glm\vector_relational.hpp">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\Texture.h">
+      <Filter>Header Files</Filter>
+    </ClInclude>
+    <ClInclude Include="include\file_io.h">
       <Filter>Header Files</Filter>
     </ClInclude>
   </ItemGroup>

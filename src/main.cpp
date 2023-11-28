@@ -8,11 +8,12 @@
 
 #include "shader.h"
 #include "camera.h"
+#include "Texture.h"
 
 float points[] = {
-   0.0f,  0.5f,  0.0f,
-   0.5f, -0.5f,  0.0f,
-  -0.5f, -0.5f,  0.0f
+   0.0f,  0.5f,  0.0f, 0.0f, 0.0f,
+   0.5f, -0.5f,  0.0f, 1.0f, 0.0f,
+  -0.5f, -0.5f,  0.0f, 0.5f, 1.0f,
 };
 
 void glErrorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, GLchar const* message, void const* user_param) {
@@ -77,21 +78,30 @@ int main() {
 
     unsigned int vertex_buffer;
     glCreateBuffers(1, &vertex_buffer);
-    glNamedBufferData(vertex_buffer, 9 * sizeof(float), &points, GL_STATIC_DRAW);
+    glNamedBufferData(vertex_buffer, 15 * sizeof(float), &points, GL_STATIC_DRAW);
 
     unsigned int vertex_array;
     glCreateVertexArrays(1, &vertex_array);
-    glVertexArrayVertexBuffer(vertex_array, 0, vertex_buffer, 0, 3 * sizeof(float));
+    glVertexArrayVertexBuffer(vertex_array, 0, vertex_buffer, 0, 5 * sizeof(float));
 
     glEnableVertexArrayAttrib(vertex_array, 0);
     glVertexArrayAttribFormat(vertex_array, 0, 3, GL_FLOAT, GL_FALSE, 0);
     glVertexArrayAttribBinding(vertex_array, 0, 0);
+
+    glEnableVertexArrayAttrib(vertex_array, 1);
+    glVertexArrayAttribFormat(vertex_array, 1, 2, GL_FLOAT, GL_FALSE, 3 * sizeof(float));
+    glVertexArrayAttribBinding(vertex_array, 1, 0);
 
     glBindVertexArray(vertex_array);
 
     Camera cam(0.0f, 0.0f, 3.0f, 0.0f, 1.0f, 0.0f, 0.0f, 45.0f);
     glm::mat4 proj = glm::perspective(glm::radians(90.0f), 800.0f / 600.0f, 0.1f, 100.0f);
     glm::mat4 model = glm::mat4(1.0f);
+
+    Texture test_texture;
+    test_texture.load_from_file("resources/container.jpg");
+    glActiveTexture(GL_TEXTURE0);
+    glBindTexture(GL_TEXTURE_2D, test_texture.get_handle());
 
     bool shouldQuit = false;
     while (!shouldQuit) {

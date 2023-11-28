@@ -173,9 +173,12 @@
   <ItemGroup>
     <ClCompile Include="extinclude\glm\detail\glm.cpp" />
     <ClCompile Include="src\camera.cpp" />
+    <ClCompile Include="src\file_io.cpp" />
     <ClCompile Include="src\glad.c" />
     <ClCompile Include="src\main.cpp" />
     <ClCompile Include="src\shader.cpp" />
+    <ClCompile Include="src\stb_image.cpp" />
+    <ClCompile Include="src\Texture.cpp" />
   </ItemGroup>
   <ItemGroup>
     <None Include=".gitignore" />
@@ -724,7 +727,9 @@
     <ClInclude Include="extinclude\SFML\Window\WindowHandle.hpp" />
     <ClInclude Include="extinclude\SFML\Window\WindowStyle.hpp" />
     <ClInclude Include="include\camera.h" />
+    <ClInclude Include="include\file_io.h" />
     <ClInclude Include="include\shader.h" />
+    <ClInclude Include="include\Texture.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">

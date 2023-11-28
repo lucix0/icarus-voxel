@@ -1,36 +1,15 @@
 #include "shader.h"
+#include "file_io.h"
 #include <glad/glad.h>
 
 #include <fstream>
 #include <iostream>
 
-bool file_to_string(const std::string& path, std::string& destination) {
-    std::ifstream stream;
-    stream.open(path, std::ios_base::in);
-
-    stream.seekg(0, std::ios::end);
-    int size = stream.tellg();
-    stream.seekg(0, std::ios::beg);
-
-    std::string buf = std::string(size, '\0');
-    if (stream.is_open()) {
-        stream.read(&buf[0], size);
-    }
-    else {
-        return false;
-    }
-
-    destination = std::move(buf);
-
-    stream.close();
-    return true;
-}
-
 Shader::Shader() : m_handle(-1) {  }
 
 void Shader::load_from_file(const std::string& vertex_path, const std::string& fragment_path) {
     std::string vertex_source;
-    if (!file_to_string(vertex_path, vertex_source)) {
+    if (!read_text_file_into_string(vertex_path, vertex_source)) {
         std::cerr << "Failed to open vertex source file\n";
     }
     
@@ -49,7 +28,7 @@ void Shader::load_from_file(const std::string& vertex_path, const std::string& f
     }
 
     std::string fragment_source;
-    if (!file_to_string(fragment_path, fragment_source)) {
+    if (!read_text_file_into_string(fragment_path, fragment_source)) {
         std::cerr << "Failed to open fragment source file\n";
     }
 
