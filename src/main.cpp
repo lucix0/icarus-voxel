@@ -16,7 +16,7 @@ float points[] = {
 };
 
 void glErrorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLsizei length, GLchar const* message, void const* user_param) {
-    auto const src_str = [source]() {
+    std::string const src_str = [source]() {
         switch (source) {
             case GL_DEBUG_SOURCE_API: return "API";
             case GL_DEBUG_SOURCE_WINDOW_SYSTEM: return "WINDOW SYSTEM";
@@ -27,7 +27,7 @@ void glErrorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLs
         }
     }();
 
-    auto const type_str = [type]() {
+    std::string const type_str = [type]() {
         switch (type) {
             case GL_DEBUG_TYPE_ERROR: return "ERROR";
             case GL_DEBUG_TYPE_DEPRECATED_BEHAVIOR: return "DEPRECATED_BEHAVIOR";
@@ -39,7 +39,7 @@ void glErrorCallback(GLenum source, GLenum type, GLuint id, GLenum severity, GLs
         }
     }();
 
-    auto const severity_str = [severity]() {
+    std::string const severity_str = [severity]() {
         switch (severity) {
             case GL_DEBUG_SEVERITY_NOTIFICATION: return "NOTIFICATION";
             case GL_DEBUG_SEVERITY_LOW: return "LOW";

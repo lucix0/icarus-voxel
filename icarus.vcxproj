@@ -101,6 +101,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-main-d.lib;sfml-system-d.lib;sfml-window-d.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y $(SolutionDir)\thirdparty\d\* $(OutDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|Win32'">
     <ClCompile>
@@ -121,6 +124,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-main.lib;sfml-system.lib;sfml-window.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y $(SolutionDir)\thirdparty\r\* $(OutDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Debug|x64'">
     <ClCompile>
@@ -137,6 +143,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-main-d.lib;sfml-system-d.lib;sfml-window-d.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y $(SolutionDir)\thirdparty\d\* $(OutDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemDefinitionGroup Condition="'$(Configuration)|$(Platform)'=='Release|x64'">
     <ClCompile>
@@ -157,6 +166,9 @@
       <AdditionalLibraryDirectories>$(SolutionDir)lib;%(AdditionalLibraryDirectories)</AdditionalLibraryDirectories>
       <AdditionalDependencies>sfml-main.lib;sfml-system.lib;sfml-window.lib;opengl32.lib;%(AdditionalDependencies)</AdditionalDependencies>
     </Link>
+    <PostBuildEvent>
+      <Command>xcopy /y $(SolutionDir)\thirdparty\r\* $(OutDir)</Command>
+    </PostBuildEvent>
   </ItemDefinitionGroup>
   <ItemGroup>
     <ClCompile Include="extinclude\glm\detail\glm.cpp" />
@@ -312,25 +324,15 @@
     <None Include="extinclude\SFML\System\Utf.inl" />
     <None Include="extinclude\SFML\System\Vector2.inl" />
     <None Include="extinclude\SFML\System\Vector3.inl" />
-    <None Include="lib\Debug\SFML\sfml-system-d-2.dll" />
-    <None Include="lib\Debug\SFML\sfml-window-d-2.dll" />
-    <None Include="lib\Release\SFML\sfml-system-2.dll" />
-    <None Include="lib\Release\SFML\sfml-window-2.dll" />
     <None Include="LICENSE" />
     <None Include="shaders\basic_fragment.glsl" />
     <None Include="shaders\basic_vertex.glsl" />
-    <None Include="thirdparty\sfml-system-2.dll" />
-    <None Include="thirdparty\sfml-system-d-2.dll" />
-    <None Include="thirdparty\sfml-window-2.dll" />
-    <None Include="thirdparty\sfml-window-d-2.dll" />
+    <None Include="thirdparty\r\sfml-system-2.dll" />
+    <None Include="thirdparty\d\sfml-system-d-2.dll" />
+    <None Include="thirdparty\r\sfml-window-2.dll" />
+    <None Include="thirdparty\d\sfml-window-d-2.dll" />
   </ItemGroup>
   <ItemGroup>
-    <Library Include="lib\Debug\SFML\sfml-main-d.lib" />
-    <Library Include="lib\Debug\SFML\sfml-system-d.lib" />
-    <Library Include="lib\Debug\SFML\sfml-window-d.lib" />
-    <Library Include="lib\Release\SFML\sfml-main.lib" />
-    <Library Include="lib\Release\SFML\sfml-system.lib" />
-    <Library Include="lib\Release\SFML\sfml-window.lib" />
     <Library Include="lib\sfml-main-d.lib" />
     <Library Include="lib\sfml-main.lib" />
     <Library Include="lib\sfml-system-d.lib" />
