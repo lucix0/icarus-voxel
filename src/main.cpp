@@ -1,10 +1,13 @@
 #include <SFML/Window.hpp>
 #include <glad/glad.h>
 
+#include <glm/gtc/type_ptr.hpp>
+
 #include <fstream>
 #include <iostream>
 
 #include "shader.h"
+#include "camera.h"
 
 float points[] = {
    0.0f,  0.5f,  0.0f,
@@ -86,6 +89,10 @@ int main() {
 
     glBindVertexArray(vertex_array);
 
+    Camera cam(0.0f, 0.0f, 3.0f, 0.0f, 1.0f, 0.0f, 0.0f, 45.0f);
+    glm::mat4 proj = glm::perspective(glm::radians(90.0f), 800.0f / 600.0f, 0.1f, 100.0f);
+    glm::mat4 model = glm::mat4(1.0f);
+
     bool shouldQuit = false;
     while (!shouldQuit) {
         sf::Event event;
@@ -98,6 +105,17 @@ int main() {
                     glViewport(0, 0, event.size.width, event.size.height);
             }
         }
+
+        cam.process_keyboard(BACKWARD, 0.01f);
+
+        int model_loc = glGetUniformLocation(test_shader.get_handle(), "model");
+        glUniformMatrix4fv(model_loc, 1, false, glm::value_ptr(model));
+
+        int proj_loc = glGetUniformLocation(test_shader.get_handle(), "proj");
+        glUniformMatrix4fv(proj_loc, 1, false, glm::value_ptr(proj));
+
+        int view_loc = glGetUniformLocation(test_shader.get_handle(), "view");
+        glUniformMatrix4fv(view_loc, 1, false, glm::value_ptr(cam.get_view_matrix()));
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
 
