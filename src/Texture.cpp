@@ -12,14 +12,14 @@ void Texture::load_from_file(const std::string& path) {
 	glTextureParameteri(m_handle, GL_TEXTURE_MIN_FILTER, GL_LINEAR_MIPMAP_LINEAR);
 	glTextureParameteri(m_handle, GL_TEXTURE_MAG_FILTER, GL_LINEAR);
 
-	int width, height, nr_channels;
+	int width, height, nr_channels;	
 	unsigned char* data = stbi_load(path.c_str(), &width, &height, &nr_channels, 0);
-
-	glTextureStorage2D(m_handle, 1, GL_RGB8, width, height);
-	glTextureSubImage2D(m_handle, 0, 0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, data);
-	glGenerateTextureMipmap(m_handle);
-
-	stbi_image_free(data);
+	if (data) {
+		glTextureStorage2D(m_handle, 1, GL_RGB8, width, height);
+		glTextureSubImage2D(m_handle, 0, 0, 0, width, height, GL_RGB, GL_UNSIGNED_BYTE, data);
+		glGenerateTextureMipmap(m_handle);
+		stbi_image_free(data);
+	}
 }
 
 unsigned int Texture::get_handle() {
